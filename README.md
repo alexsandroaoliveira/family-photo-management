@@ -3,7 +3,23 @@
 A basic family photo management application, where a family member can view photos in albums of another family member, while being able to create, update, and delete their own photos and albums.
 
 Start: 09/04/2024 09:00am
-Finish:
+Finish: 09/04/2024 12:45pm
+
+
+## Usage
+**Backend** port: 3001
+```bash
+cd .\Source\family-photo-management-backend\
+npm run build
+npm start 
+```
+
+**frontend** port: 3000
+```bash
+cd .\Source\family-photo-management-frontend\
+npm run build
+npm start 
+```
 
 ## Guidelines
 - Write clean, modular, and reusable code.

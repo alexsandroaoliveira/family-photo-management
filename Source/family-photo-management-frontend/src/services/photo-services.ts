@@ -19,5 +19,5 @@ export class PhotoServices implements IPhotoServices {
     return [];
   };
 
-  apiClient: IApiClient = new ApiClient();
+  apiClient: IApiClient = new ApiClient(); //TODO - move to the constructor to be able to mock
 }
