@@ -1,8 +1,12 @@
 import express, { Request, Response } from "express";
 import axios from "axios";
+import cors from "cors";
 
 const app = express();
 const port = 3001;
+
+app.use(cors({ origin: "http://localhost:3000" }));
+app.use(express.json());
 
 app.get("/users", async (req: Request, res: Response) => {
   try {
@@ -72,7 +76,6 @@ app.post("/photos", async (req, res) => {
       req
     );
     return response.data;
-
   } catch (error) {
     console.error("Error adding albums:", error);
     res.status(500).json({ error: "Failed to add photo" });
@@ -91,7 +94,6 @@ app.delete("/albums/:albumId", async (req, res) => {
       `https://jsonplaceholder.typicode.com/albums/${albumId}`
     );
     return response.data;
-
   } catch (error) {
     console.error("Error deleting albums:", error);
     res.status(500).json({ error: "Failed to delete albums" });
@@ -107,7 +109,8 @@ app.delete("/photos/:photoId", async (req, res) => {
     }
 
     const response = await axios.delete(
-      `https://jsonplaceholder.typicode.com/photos/${photoId}`);
+      `https://jsonplaceholder.typicode.com/photos/${photoId}`
+    );
     return response.data;
   } catch (error) {
     console.error("Error deleting photos:", error);
