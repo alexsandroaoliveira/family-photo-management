@@ -28,7 +28,7 @@ const AlbumPhotos: React.FC = () => {
     <div>
       <h2>{album?.title}</h2>
       <div className="photo-grid">
-        {photos.map((photo) => (
+        {album && photos.map((photo) => (
           <PhotoCard key={photo.id} album={album!} photo={photo} />
         ))}
       </div>
