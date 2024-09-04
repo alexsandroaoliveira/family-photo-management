@@ -20,6 +20,20 @@ app.get("/users", async (req: Request, res: Response) => {
   }
 });
 
+app.get("/users/:userId", async (req: Request, res: Response) => {
+  try {
+    const userId = parseInt(req.params.userId, 10);
+
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/users/${userId}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    res.status(500).json({ error: "Failed to fetch users" });
+  }
+});
+
 app.get("/users/:userId/albums", async (req: Request, res: Response) => {
   try {
     const userId = parseInt(req.params.userId, 10);
@@ -56,7 +70,26 @@ app.get("/albums/:albumId/photos", async (req: Request, res: Response) => {
   }
 });
 
+app.get("/albums/:albumId", async (req: Request, res: Response) => {
+  try {
+    const albumId = parseInt(req.params.albumId, 10);
+
+    if (isNaN(albumId)) {
+      return res.status(400).json({ error: "Invalid Album ID" });
+    }
+
+    const response = await axios.get(
+      `https://jsonplaceholder.typicode.com/albums/${albumId}`
+    );
+    res.json(response.data);
+  } catch (error) {
+    console.error("Error fetching albums:", error);
+    res.status(500).json({ error: "Failed to fetch photos" });
+  }
+});
+
 app.post("/albums", async (req, res) => {
+  return res.status(200).json(req.body);
   try {
     const response = await axios.post(
       `https://jsonplaceholder.typicode.com/albums`,
@@ -70,6 +103,7 @@ app.post("/albums", async (req, res) => {
 });
 
 app.post("/photos", async (req, res) => {
+  return res.status(200).json(req.body);
   try {
     const response = await axios.post(
       `https://jsonplaceholder.typicode.com/photos`,
@@ -83,6 +117,7 @@ app.post("/photos", async (req, res) => {
 });
 
 app.delete("/albums/:albumId", async (req, res) => {
+  return res.status(200);
   try {
     const albumId = parseInt(req.params.albumId, 10);
 
@@ -101,6 +136,7 @@ app.delete("/albums/:albumId", async (req, res) => {
 });
 
 app.delete("/photos/:photoId", async (req, res) => {
+  return res.status(200);
   try {
     const photoId = parseInt(req.params.photoId, 10);
 

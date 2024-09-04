@@ -5,63 +5,70 @@ A basic family photo management application, where a family member can view phot
 Start: 09/04/2024 09:00am
 Finish:
 
+## Guidelines
+- Write clean, modular, and reusable code.
+- Use interfaces and types to define the structure of the API response and component props.
+- Ensure that all components are typed correctly.
+- Ensure the application is performant and handles API errors gracefully.
+- Follow best practices for accessibility (e.g., semantic HTML, aria labels).
+
 ## Roadmap:
 [x] - A GitHub repository containing the code for the project.
 [x] - A README.md file with instructions on how to run the project locally.
-[] - Test Plan
-[] - Configure the project with a linter and a code formatter.
-[] - Postman Colection for jsonplaceholder
-[] - Postman Colection for Family photo management
-[] - Use interfaces and types to define the structure of the API response and component props.
-[] - Ensure that all components are typed correctly.
+[x] - Test Plan
+[x] - Configure the project with a linter and a code formatter. (vscode)
 [] - Write at least 1 unit test
-[] - Write clean, modular, and reusable code.
-[] - Ensure the application is performant and handles API errors gracefully.
-[] - Follow best practices for accessibility (e.g., semantic HTML, aria labels).
-[] - Write unit test(s) for any business logic created in the BE for a FE.
 [] - (Optional) A live demo link if the application is deployed.
 [] - Use Storyteller
 [] - Improve design
+[] - Postman Colection for jsonplaceholder
+[] - Postman Colection for Family photo management
 
 **Backend**
-[] - Create a Backend for a Frontend using Typescript that maps jsonplaceholder API response
-[] - Get Users Endpoint 
-[] - Get User Albuns Endpoint 
-[] - Get Album Photos Endpoint 
-[] - Add Photo Endpoint 
-[] - Add Album Endpoint 
-[] - Delete Photo Endpoint 
-[] - Delete Album Endpoint 
-[] - Persist the data at jsonplaceholder (optimistic updates)
+[x] - Create a Backend for a Frontend using Typescript that maps jsonplaceholder API response
+[x] - Get Users Endpoint 
+[x] - Get User Albuns Endpoint 
+[x] - Get Album Photos Endpoint 
+[x] - Add Photo Endpoint 
+[x] - Add Album Endpoint 
+[x] - Delete Photo Endpoint 
+[x] - Delete Album Endpoint 
+[x] - Persist the data at jsonplaceholder (optimistic updates)
+[] - Write unit test(s) for any business logic created in the BE for a FE.
+[] - Add Auth
 
 **Frontend**
-[] - Create a new React application using Typescript
-[] - Add Photo: Allows users to upload a photo, assign it to an existing or new album, and add a title or description.
-[] - (page) My users: Display a list of users (show their username and email) which opens a page to the albums of that user, when clicked on.
-[] - (page) My user albums: Display a list of photo albums for a user (show their username and email) which opens a page to the photos of that album, when clicked on.
-[] - (page) My album photos: Display a list of photos for a users album (show their username).
+[x] - Create a new React application using Typescript
+[x] - (page) My users: Display a list of users (show their username and email) which opens a page to the albums of that user, when clicked on.
+[x] - (page) My user albums: Display a list of photo albums for a user (show their username and email) which opens a page to the photos of that album, when clicked on.
+[x] - (page) My album photos: Display a list of photos for a users album (show their username).
+[x] - Add Photo: Allows users to upload a photo, assign it to an existing or new album, and add a title or description.
+[x] - Navigation Menu
+[x] - User context
+[x] - Select Current User (placeholder to Auth)
+[x] - List the current user albums on the Add Photo Form
+[x] - Ability to delete Album of the current user only
+[x] - Ability to delete photo of the current user only
+[] - Move code from the components to Services
+[] - Create Unit test to the services
+[] - Ability to create a new album on the Add Photo Form
 [] - Responsive
+[] - Login page
 
 ---
 
 ## Test-plan
-[] - User can list all users
-[] - User can list all users albuns
-[] - User can view all users albuns photos
-[] - User can view add photo to your existing album 
-[] - User can view add photo to a new album
-[] - User can delete your photos
-[] - User can delete your Albuns
-[] - User cannot add photo to other users albuns
-[] - User cannot delete other user's album
-[] - User cannot delete other user's photos
+[x] - User can list all users
+[x] - User can list all users albuns
+[x] - User can view all users albuns photos
+[x] - User can view add photo to your existing album 
+[x] - User can view add photo to a new album
+[x] - User can delete your photos
+[x] - User can delete your Albuns
+[x] - User cannot add photo to other users albuns
+[x] - User cannot delete other user's album
+[x] - User cannot delete other user's photos
 [] - U.I should be responsive
-
-1. CRUD photos and albums
-    1. Read other users photos & albums
-    2. Create, update, and delete current user’s photo’s & albums
-2. I should be able to open the albums page for a user.
-    1. If I open my own album page I want to be able to edit/delete my photos and albums.
 
 ---
 

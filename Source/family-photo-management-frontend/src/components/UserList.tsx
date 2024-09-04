@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { getUsers } from '../services/api';
-import { User } from '../types';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { User, IApiClient } from "../types";
+import { ApiClient } from "../services/api-client";
 
 const UserList: React.FC = () => {
+  const apiClient: IApiClient = new ApiClient();
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const data = await getUsers();
+        const data = await apiClient.getUsers();
         setUsers(data);
       } catch (error) {
         console.error("Error fetching users:", error);
@@ -22,7 +23,7 @@ const UserList: React.FC = () => {
 
   return (
     <div>
-      <h1>Family Members</h1>
+      <h3>Users:</h3>
       <ul>
         {users.map((user) => (
           <li key={user.id}>
