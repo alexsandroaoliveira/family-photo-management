@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
-import { Album, User, IApiClient } from "../types";
-import { ApiClient } from "../services/api-client";
+import { Album, User, IAlbumServices, IUserServices } from "../types";
 import { UserContext } from "../context/userContext";
+import { AlbumServices } from "../services/album-services";
+import { UserServices } from "../services/user-services";
 
 const UserAlbums: React.FC = () => {
-  const apiClient: IApiClient = new ApiClient();
+  const albumServices: IAlbumServices = new AlbumServices();
+  const userServices: IUserServices = new UserServices();
   const { userId } = useParams<{ userId: string }>();
   const [albums, setAlbums] = useState<Album[]>([]);
   const [user, setUser] = useState<User>();
@@ -13,33 +15,13 @@ const UserAlbums: React.FC = () => {
 
   useEffect(() => {
     if (userId) {
-      const fetchAlbums = async () => {
-        try {
-          const data = await apiClient.getUserAlbums(parseInt(userId, 10));
-          setAlbums(data);
-        } catch (error) {
-          console.error("Error fetching albums:", error);
-          // Handle error
-        }
-      };
-
-      const fetchUser = async () => {
-        try {
-          const data = await apiClient.getUserById(parseInt(userId, 10));
-          setUser(data);
-        } catch (error) {
-          console.error("Error fetching albums:", error);
-          // Handle error
-        }
-      };
-
-      fetchUser();
-      fetchAlbums();
+      userServices.fetchUser(parseInt(userId, 10)).then((data) => setUser(data));
+      albumServices.fetchAlbums(parseInt(userId, 10)).then((data) => setAlbums(data));
     }
   }, [userId]);
 
   const handleDeleteAlbum = (albumId: number) => {
-    apiClient.deleteAlbum(albumId);
+    albumServices.deleteAlbum(albumId);
   };
 
   return (

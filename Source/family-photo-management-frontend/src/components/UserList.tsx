@@ -1,24 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { User, IApiClient } from "../types";
-import { ApiClient } from "../services/api-client";
+import { User, IUserServices } from "../types";
+import { UserServices } from "../services/user-services";
 
 const UserList: React.FC = () => {
-  const apiClient: IApiClient = new ApiClient();
+  const userServices: IUserServices = new UserServices();
   const [users, setUsers] = useState<User[]>([]);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const data = await apiClient.getUsers();
-        setUsers(data);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-        // Handle error (e.g., display error message)
-      }
-    };
-
-    fetchUsers();
+    userServices.fetchUsers().then((data) => setUsers(data));
   }, []);
 
   return (

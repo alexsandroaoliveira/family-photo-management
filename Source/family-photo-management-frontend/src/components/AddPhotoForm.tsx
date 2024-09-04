@@ -1,11 +1,13 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { ApiClient } from "../services/api-client";
 import { UserContext } from "../context/userContext";
-import { Album, IApiClient } from "../types";
+import { Album, IAlbumServices, IPhotoServices } from "../types";
+import { PhotoServices } from "../services/photo-services";
+import { AlbumServices } from "../services/album-services";
 
 const AddPhotoForm: React.FC = () => {
-  const apiClient: IApiClient = new ApiClient();
+  const photoServices: IPhotoServices = new PhotoServices();
+  const albumServices: IAlbumServices = new AlbumServices();
   const navigate = useNavigate();
   const [albums, setAlbums] = useState<Album[]>();
   const [album, setAlbum] = useState<Album>();
@@ -15,24 +17,18 @@ const AddPhotoForm: React.FC = () => {
   const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
-    const fetchUsers = async () => {
-      try {
-        const albunsData = await apiClient.getUserAlbums(currentUser?.id ?? 0);
-        setAlbums(albunsData);
-        setAlbum(albunsData[0] || null);
-      } catch (error) {
-        console.error("Error fetching users:", error);
-        // TODO - Handle error
-      }
-    };
-
-    fetchUsers();
+    if (currentUser) {
+      albumServices.fetchAlbums(currentUser.id).then((data) => {
+        setAlbums(data);
+        setAlbum(data[0] || null);
+      });
+    }
   }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     if (album) {
       event.preventDefault();
-      await apiClient.postAlbumPhoto({
+      await photoServices.postAlbumPhoto({
         id: 0,
         albumId: album?.id ?? 0,
         title: title,

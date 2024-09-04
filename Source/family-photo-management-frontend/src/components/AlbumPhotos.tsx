@@ -1,39 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { ApiClient } from "../services/api-client";
-import { Album, Photo, IApiClient } from "../types";
+import { Album, Photo, IPhotoServices, IAlbumServices } from "../types";
 import PhotoCard from "./PhotoCard";
+import { PhotoServices } from "../services/photo-services";
+import { AlbumServices } from "../services/album-services";
 
 const AlbumPhotos: React.FC = () => {
-  const apiClient: IApiClient = new ApiClient();
+  const photoServices: IPhotoServices = new PhotoServices();
+  const albumServices: IAlbumServices = new AlbumServices();
   const { albumId } = useParams<{ albumId: string }>();
   const [photos, setPhotos] = useState<Photo[]>([]);
   const [album, setAlbum] = useState<Album>();
 
   useEffect(() => {
     if (albumId) {
-      const fetchPhotos = async () => {
-        try {
-          const data = await apiClient.getAlbumPhotos(parseInt(albumId, 10));
-          setPhotos(data);
-        } catch (error) {
-          console.error("Error fetching photos:", error);
-          // Handle error
-        }
-      };
+      albumServices
+        .fetchAlbum(parseInt(albumId, 10))
+        .then((data) => setAlbum(data));
 
-      const fetchAlbum = async () => {
-        try {
-          const data = await apiClient.getAlbumById(parseInt(albumId, 10));
-          setAlbum(data);
-        } catch (error) {
-          console.error("Error fetching photos:", error);
-          // Handle error
-        }
-      };
-
-      fetchAlbum();
-      fetchPhotos();
+      photoServices
+        .fetchPhotos(parseInt(albumId, 10))
+        .then((data) => setPhotos(data));
     }
   }, [albumId]);
 

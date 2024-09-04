@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { ApiClient } from "../services/api-client";
-import { User, IApiClient } from "../types";
+import { User, IUserServices } from "../types";
 import { UserContext } from "../context/userContext";
+import { UserServices } from "../services/user-services";
 
 const Navigation: React.FC = () => {
-  const apiClient: IApiClient = new ApiClient();
+  const userServices: IUserServices = new UserServices();
   const [users, setUsers] = useState<User[]>([]);
   const { currentUser, setCurrentUser } = useContext(UserContext);
 
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const data = await apiClient.getUsers();
-        setUsers(data);
-        setCurrentUser(data[0] || null);
+        await userServices.fetchUsers().then((data) => {
+          setUsers(data);
+          setCurrentUser(data[0] || null);
+        });
       } catch (error) {
         console.error("Error fetching users:", error);
         // TODO - Handle error

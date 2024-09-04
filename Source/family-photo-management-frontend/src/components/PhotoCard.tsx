@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import { Photo, IApiClient, Album } from "../types";
+import { Photo, Album, IPhotoServices } from "../types";
 import { UserContext } from "../context/userContext";
-import { ApiClient } from "../services/api-client";
+import { PhotoServices } from "../services/photo-services";
 
 interface PhotoCardProps {
   album: Album;
@@ -9,11 +9,11 @@ interface PhotoCardProps {
 }
 
 const PhotoCard: React.FC<PhotoCardProps> = ({ album, photo }) => {
-  const apiClient: IApiClient = new ApiClient();
+  const photoServices: IPhotoServices = new PhotoServices();
   const { currentUser } = useContext(UserContext);
 
   const handleDeleteAlbum = (photoId: number) => {
-    apiClient.deletePhoto(photoId);
+    photoServices.deletePhoto(photoId);
   };
   return (
     <div className="photo-card">
